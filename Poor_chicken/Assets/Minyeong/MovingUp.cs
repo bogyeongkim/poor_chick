@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingUp : MonoBehaviour
 {
     public float speed = 2.0f; // 플랫폼의 이동 속도
     public float distance = 5.0f; // 이동할 거리
-    public bool moveRight = true; // 이동 방향 (true: 오른쪽, false: 왼쪽)
+    public bool moveUp = true; // 이동 방향 (true: 오른쪽, false: 왼쪽)
 
     private Vector3 startPosition;
     private Vector3 endPosition;
@@ -16,13 +18,13 @@ public class MovingPlatform : MonoBehaviour
         startPosition = transform.position;
 
         // 이동 방향에 따라 끝 위치 설정
-        if (moveRight)
+        if (moveUp)
         {
-            endPosition = startPosition + new Vector3(distance, 0, 0);
+            endPosition = startPosition + new Vector3(0, distance, 0);
         }
         else
         {
-            endPosition = startPosition - new Vector3(distance, 0, 0);
+            endPosition = startPosition - new Vector3(0, distance, 0);
         }
 
         journeyLength = Vector3.Distance(startPosition, endPosition);
@@ -44,22 +46,5 @@ public class MovingPlatform : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Hello Collision");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Hello Trigger");
-        other.transform.parent = transform;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Goodbye Trigger");
-        other.transform.parent = null;
     }
 }
