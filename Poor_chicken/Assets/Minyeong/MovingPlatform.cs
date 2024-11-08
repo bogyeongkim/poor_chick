@@ -45,4 +45,21 @@ public class MovingPlatform : MonoBehaviour
 
         transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Hello Collision");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Hello Trigger");
+        other.transform.parent = transform;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Goodbye Trigger");
+        other.transform.parent = null;
+    }
 }
