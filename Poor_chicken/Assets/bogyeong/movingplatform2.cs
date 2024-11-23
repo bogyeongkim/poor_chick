@@ -67,9 +67,9 @@ public class movingplatform2 : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
     if (other.CompareTag("Player"))
-    {
+        {
 
-        other.transform.parent = null; // 何葛 包拌 秦力
+            other.transform.parent = null; // 何葛 包拌 秦力
+        }
     }
-}
 }
