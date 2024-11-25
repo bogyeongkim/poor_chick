@@ -5,24 +5,27 @@ using UnityEngine;
 public class FakePlatform : MonoBehaviour
 {
     private MeshCollider meshCollider;
-    private bool isReal = false; // ¹ßÆÇÀÇ »óÅÂ (ÁøÂ¥ÀÎÁö ¿©ºÎ)
+    private bool isReal = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
     void Start()
     {
-        meshCollider = GetComponent<MeshCollider>();
-        meshCollider.isTrigger = false;
+        //meshCollider = GetComponent<MeshCollider>();
+        //meshCollider.isTrigger = true;
     }
 
     public void SetAsReal()
     {
-        isReal = true; // ÁøÂ¥ ¹ßÆÇ ¼³Á¤
+        meshCollider = GetComponent<MeshCollider>();
+        isReal = true; // ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        meshCollider.isTrigger = false;
         Debug.Log(gameObject.name + " is Real!");
     }
 
     public void SetAsFake()
     {
-        isReal = false; // °¡Â¥ ¹ßÆÇ ¼³Á¤
-        meshCollider.isTrigger = true;
+        meshCollider = GetComponent<MeshCollider>();
+        isReal = false; // ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //meshCollider.isTrigger = true;
         Debug.Log(gameObject.name + " is Fake!");
     }
 }
