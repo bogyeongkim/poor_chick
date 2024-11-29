@@ -21,14 +21,14 @@ public class DisappearingPlatform : MonoBehaviour
         while (true) // 무한 반복
         {
             yield return new WaitForSeconds(disappearTime); // 사라지기까지 대기
-            Debug.Log("Platform disappearing");
+            //Debug.Log("Platform disappearing");
             a.SetActive(false); // 플랫폼 비활성화
             b.SetActive(false);
             c.SetActive(false);
 
 
             yield return new WaitForSeconds(respawnTime);
-            Debug.Log("Platform respawning");
+            //Debug.Log("Platform respawning");
             a.SetActive(true);
             b.SetActive(true);
             c.SetActive(true);

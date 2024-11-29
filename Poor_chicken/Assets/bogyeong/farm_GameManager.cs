@@ -23,15 +23,6 @@ public class farm_GameManager : MonoBehaviour
 
         Debug.Log("Game Started. Current Lives: " + currentLives);
 
-        // 모든 함정 오브젝트에 트리거 콜백 연결
-        foreach (var trap in traps)
-        {
-            var trapCollider = trap.GetComponent<Collider>();
-            if (trapCollider != null)
-            {
-                trapCollider.isTrigger = true;
-            }
-        }
 
         // 모든 아이템 오브젝트에 트리거 콜백 연결
         foreach (var item in items)
@@ -46,7 +37,7 @@ public class farm_GameManager : MonoBehaviour
         // 모든 플랫폼 오브젝트에 트리거 콜백 연결
         foreach (var platform in platforms)
         {
-            var platformCollider = platform.GetComponent<Collider>();
+            var platformCollider = platform.GetComponent<BoxCollider>();
             if (platformCollider != null)
             {
                 platformCollider.isTrigger = true;
@@ -107,6 +98,7 @@ public class farm_GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
     // 트리거 충돌 처리
     void OnTriggerEnter(Collider other)
     {
@@ -149,8 +141,7 @@ public class farm_GameManager : MonoBehaviour
     {
         float playerHeight = transform.position.y;
 
-        // 플랫폼 아래로 떨어졌는지 확인 (높이 0 이하)
-        if (playerHeight < 0)
+        if (playerHeight < -30.0f)
         {
             LoseLife(respawn: true); // 추락 시 리스폰 위치로 이동
         }
@@ -159,18 +150,17 @@ public class farm_GameManager : MonoBehaviour
     // 리스폰 위치 설정
     void SetRespawnPosition(int platformIndex)
     {
-        // 각 플랫폼에 대한 리스폰 위치 설정 (플랫폼 순서에 맞춰 리스폰 위치 변경)
-        if (platformIndex == 0)
+        if (platformIndex >= 0 && platformIndex < platforms.Length)
         {
-            respawnPosition = new Vector3(-10.12f, 13.392f, 18.46f); // 첫 번째 플랫폼
+            Vector3 platformPosition = platforms[platformIndex].transform.position;
+
+            respawnPosition = new Vector3(platformPosition.x, platformPosition.y + 3.0f, platformPosition.z);
+
+            Debug.Log($"리스폰 설정 : {respawnPosition}");
         }
-        else if (platformIndex == 1)
+        else
         {
-            respawnPosition = new Vector3(-13.52f, 14.15f, 9.66f); // 두 번째 플랫폼
-        }
-        else if (platformIndex == 2)
-        {
-            respawnPosition = new Vector3(0, 10f, 3f); // 세 번째 플랫폼
+            Debug.LogWarning("리스폰 포인트 오류");
         }
     }
 }

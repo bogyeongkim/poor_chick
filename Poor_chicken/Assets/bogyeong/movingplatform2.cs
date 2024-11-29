@@ -29,9 +29,17 @@ public class movingplatform2 : MonoBehaviour
         {
             endPosition = startPosition + new Vector3(0, distance, 0);
         }
-        else
+        else if (move == 3)
         {
             endPosition = startPosition - new Vector3(0, distance, 0);
+        }
+        else if (move == 4)
+        {
+            endPosition = startPosition - new Vector3(0, 0, distance);
+        }
+        else if (move == 5)
+        {
+            endPosition = startPosition + new Vector3(0, 0, distance);
         }
 
         journeyLength = Vector3.Distance(startPosition, endPosition);
@@ -42,17 +50,20 @@ public class movingplatform2 : MonoBehaviour
     {
         float distCovered = (Time.time - startTime) * speed;
         float fractionOfJourney = distCovered / journeyLength;
-
+   
         if (fractionOfJourney >= 1)
         {
-            // 방향 전환
+            transform.position = endPosition;  
+                                               
             Vector3 temp = startPosition;
             startPosition = endPosition;
             endPosition = temp;
             startTime = Time.time; // 시간 초기화
         }
-
-        transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+        else
+        {
+            transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+        }
     }
 
     void OnTriggerEnter(Collider other)
