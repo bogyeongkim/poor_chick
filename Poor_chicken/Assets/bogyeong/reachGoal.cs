@@ -31,10 +31,10 @@ public class reachGoal : MonoBehaviour
 
     IEnumerator WaitForAnimation()
     {
-        yield return new WaitForSeconds(mom.GetCurrentAnimatorStateInfo(0).length + 1.0f);
+        yield return new WaitForSeconds(mom.GetCurrentAnimatorStateInfo(0).length + 4.0f);
 
 
         UnityEngine.Debug.Log("load next scene");
-        //SceneManager.LoadScene("ending");
+        SceneManager.LoadScene("EndVideo");
     }
 }

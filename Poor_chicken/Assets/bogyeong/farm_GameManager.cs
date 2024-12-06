@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI; // UI 네임스페이스 추가
 
 public class farm_GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class farm_GameManager : MonoBehaviour
 
     private Vector3 respawnPosition;  // 리스폰 위치
     private bool[] platformTouched;   // 각 플랫폼을 밟았는지 여부
+
+    // 하트 UI를 위한 배열 (하트 이미지)
+    public Image[] heartImages; // 3개의 하트 이미지를 담을 배열
 
     void Start()
     {
@@ -54,6 +58,7 @@ public class farm_GameManager : MonoBehaviour
     // 목숨 증가 함수 (아이템을 먹었을 때 호출)
     public void AddLife()
     {
+        UpdateHearts();
         if (currentLives < maxLives)
         {
             currentLives++;
@@ -72,7 +77,7 @@ public class farm_GameManager : MonoBehaviour
         {
             currentLives--;
             Debug.Log("Life lost. Current Lives: " + currentLives);
-
+            UpdateHearts();
             if (currentLives == 0)
             {
                 GameOver(); // 목숨이 0이 되면 게임 종료
@@ -161,6 +166,23 @@ public class farm_GameManager : MonoBehaviour
         else
         {
             Debug.LogWarning("리스폰 포인트 오류");
+        }
+    }
+
+    // 하트 UI 갱신
+    void UpdateHearts()
+    {
+        // 현재 목숨 수에 맞춰 하트의 활성화 상태를 변경
+        for (int i = 0; i < heartImages.Length; i++)
+        {
+            if (i < currentLives)
+            {
+                heartImages[i].enabled = true; // 하트가 활성화
+            }
+            else
+            {
+                heartImages[i].enabled = false; // 하트가 비활성화
+            }
         }
     }
 }

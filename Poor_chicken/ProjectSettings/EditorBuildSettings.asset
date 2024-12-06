@@ -12,6 +12,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Mainmenu.unity
     guid: a332078d9cf1835439838c0a3b072ae9
   - enabled: 1
+    path: Assets/Scenes/IntroVideo.unity
+    guid: 4ac5d39600d72af4da239fd3b7f500dd
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: cc84f8474e57414409ee00fd6bd81305
+  - enabled: 1
+    path: Assets/Scenes/iceland.unity
+    guid: 122d8cbf51772b041b8114b2e4891250
+  - enabled: 1
     path: Assets/Scenes/farm.unity
     guid: e174a585be6abc246bac9791bb6e5b58
+  - enabled: 1
+    path: Assets/Scenes/EndVideo.unity
+    guid: ec0bb43bd6bd8ce459fd61e151e2cf00
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: 78d06e08b652e7b4eb432fa84ec0a392
   m_configObjects: {}
