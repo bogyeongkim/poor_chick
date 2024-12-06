@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI; // UI 네임스페이스 추가
 
 public class PlayerLifeManager : MonoBehaviour
 {
@@ -15,13 +16,16 @@ public class PlayerLifeManager : MonoBehaviour
     private Vector3 respawnPosition;  // 리스폰 위치
     private bool[] platformTouched;   // 각 플랫폼을 밟았는지 여부
 
+    // 하트 UI를 위한 배열 (하트 이미지)
+    public Image[] heartImages; // 3개의 하트 이미지를 담을 배열
+
     void Start()
     {
         currentLives = maxLives;      // 스테이지 시작 시 최대 목숨 수로 설정
         respawnPosition = transform.position; // 시작 위치를 초기 리스폰 위치로 설정
         platformTouched = new bool[platforms.Length]; // 각 플랫폼을 밟았는지 추적하기 위한 배열 초기화
 
-        Debug.Log("Game Started. Current Lives: " + currentLives);
+        UpdateHearts(); // 하트 UI 초기화
 
         // 모든 함정 오브젝트에 트리거 콜백 연결
         foreach (var trap in traps)
@@ -54,7 +58,7 @@ public class PlayerLifeManager : MonoBehaviour
                 {
                     meshCollider.isTrigger = false; // MeshCollider는 트리거가 불가능
                 }
-                
+
                 // BoxCollider가 없다면 추가하고 isTrigger 설정
                 BoxCollider boxCollider = platform.GetComponent<BoxCollider>();
                 if (boxCollider == null)
@@ -79,6 +83,7 @@ public class PlayerLifeManager : MonoBehaviour
         {
             currentLives++;
             Debug.Log("Life added. Current Lives: " + currentLives);
+            UpdateHearts(); // 하트 UI 업데이트
         }
         else
         {
@@ -93,6 +98,7 @@ public class PlayerLifeManager : MonoBehaviour
         {
             currentLives--;
             Debug.Log("Life lost. Current Lives: " + currentLives);
+            UpdateHearts(); // 하트 UI 업데이트
 
             if (currentLives == 0)
             {
@@ -183,6 +189,23 @@ public class PlayerLifeManager : MonoBehaviour
         else if (platformIndex == 2)
         {
             respawnPosition = new Vector3(-29.814f, 18.558f, 24.698f); // 세 번째 플랫폼
+        }
+    }
+
+    // 하트 UI 갱신
+    void UpdateHearts()
+    {
+        // 현재 목숨 수에 맞춰 하트의 활성화 상태를 변경
+        for (int i = 0; i < heartImages.Length; i++)
+        {
+            if (i < currentLives)
+            {
+                heartImages[i].enabled = true; // 하트가 활성화
+            }
+            else
+            {
+                heartImages[i].enabled = false; // 하트가 비활성화
+            }
         }
     }
 }
