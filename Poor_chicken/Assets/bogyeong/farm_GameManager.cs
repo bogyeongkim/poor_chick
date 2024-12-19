@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.UI; // UI 네임스페이스 추가
+using UnityEngine.UI; 
 
 public class farm_GameManager : MonoBehaviour
 {
@@ -19,11 +19,16 @@ public class farm_GameManager : MonoBehaviour
     // 하트 UI를 위한 배열 (하트 이미지)
     public Image[] heartImages; // 3개의 하트 이미지를 담을 배열
 
+    public AudioClip[] soundEffect;
+    private AudioSource audioSource;
+
     void Start()
     {
         currentLives = maxLives;      // 스테이지 시작 시 최대 목숨 수로 설정
         respawnPosition = transform.position; // 시작 위치를 초기 리스폰 위치로 설정
         platformTouched = new bool[platforms.Length]; // 각 플랫폼을 밟았는지 추적하기 위한 배열 초기화
+
+        audioSource = GetComponent<AudioSource>();
 
         Debug.Log("Game Started. Current Lives: " + currentLives);
 
@@ -73,6 +78,7 @@ public class farm_GameManager : MonoBehaviour
     // 목숨 감소 함수 (플랫폼 아래로 떨어지거나 함정을 밟았을 때 호출)
     public void LoseLife(bool respawn = false)
     {
+        audioSource.PlayOneShot(soundEffect[2]);
         if (currentLives > 0)
         {
             currentLives--;
@@ -101,6 +107,7 @@ public class farm_GameManager : MonoBehaviour
     {
         Debug.Log("Game Over! No lives remaining.");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        audioSource.PlayOneShot(soundEffect[0]);
     }
 
 
@@ -113,6 +120,7 @@ public class farm_GameManager : MonoBehaviour
             if (other.gameObject == trap) // 충돌한 오브젝트가 함정인지 확인
             {
                 LoseLife(); // 리스폰 없이 목숨만 차감
+                
                 return;
             }
         }
@@ -123,6 +131,7 @@ public class farm_GameManager : MonoBehaviour
             if (other.gameObject == item) // 충돌한 오브젝트가 아이템인지 확인
             {
                 AddLife();
+                audioSource.PlayOneShot(soundEffect[1]);
                 Destroy(other.gameObject); // 아이템을 먹은 후 파괴
                 return;
             }

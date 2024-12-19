@@ -5,10 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class icelandGoal : MonoBehaviour
 {
+
+    public AudioClip soundEffect;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         UnityEngine.Debug.Log("Goal in!");
-
+        audioSource.PlayOneShot(soundEffect);
         StartCoroutine(WaitForAnimation());
     }
 

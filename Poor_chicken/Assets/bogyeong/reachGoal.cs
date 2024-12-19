@@ -8,10 +8,13 @@ public class reachGoal : MonoBehaviour
 {
     public Animator mom;
 
+    public AudioClip[] soundEffect;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,7 +26,8 @@ public class reachGoal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         UnityEngine.Debug.Log("Goal in!");
-
+        audioSource.PlayOneShot(soundEffect[0]);
+        audioSource.PlayOneShot(soundEffect[1]);
         mom.SetTrigger("idle_4");
 
         StartCoroutine(WaitForAnimation());

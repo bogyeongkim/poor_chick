@@ -38,13 +38,16 @@ public class MovingUp : MonoBehaviour
 
         if (fractionOfJourney >= 1)
         {
-            // 방향 전환
+            transform.position = endPosition;
+
             Vector3 temp = startPosition;
             startPosition = endPosition;
             endPosition = temp;
             startTime = Time.time; // 시간 초기화
         }
-
-        transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+        else
+        {
+            transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+        }
     }
 }

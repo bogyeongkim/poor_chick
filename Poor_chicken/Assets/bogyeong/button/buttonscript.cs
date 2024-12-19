@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class buttonscript : MonoBehaviour
 {
-    public GameObject howtoplay;
+    public GameObject box;
+
+    public AudioSource music;
+    public Button musicOnButton; 
+    public Button musicOffButton; 
 
     public void OnStartButtonClick()
     {
@@ -17,22 +22,49 @@ public class buttonscript : MonoBehaviour
     public void OnHelpButtonClick()
     {
         UnityEngine.Debug.Log("helpbutton");
-        howtoplay.SetActive(true);
+        box.SetActive(true);
     }
 
     public void OnexitButtonClick()
     {
         UnityEngine.Debug.Log("exitbutton");
-        howtoplay.SetActive(false);
+        box.SetActive(false);
     }
 
     public void RestartGame()
     {
-        // MainMenu 씬으로 전환
         SceneManager.LoadScene("title"); 
     }
 
-    // 게임 종료 함수
+    public void Mainmenu()
+    {
+        SceneManager.LoadScene("Mainmenu");
+    }
+
+    public void MusicOn()
+    {
+        if (music.isPlaying)
+        {
+            music.Stop();
+        }
+
+        musicOffButton.interactable = true;
+
+        musicOnButton.interactable = false;
+    }
+
+    public void MusicOff()
+    {
+        if (music.isPlaying)
+        {
+            music.Play();
+        }
+
+        musicOffButton.interactable = false;
+
+        musicOnButton.interactable = true;
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
