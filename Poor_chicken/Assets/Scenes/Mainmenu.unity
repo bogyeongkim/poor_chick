@@ -1179,7 +1179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7787a17a971421849826ba6e7198ae03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howtoplay: {fileID: 510375076}
+  box: {fileID: 510375076}
+  music: {fileID: 0}
+  musicOnButton: {fileID: 0}
+  musicOffButton: {fileID: 0}
 --- !u!4 &849647425
 Transform:
   m_ObjectHideFlags: 0
