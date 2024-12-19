@@ -103,7 +103,7 @@ public class farm_GameManager : MonoBehaviour
     void GameOver()
     {
         Debug.Log("Game Over! No lives remaining.");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("GameOver");
         audioSource.PlayOneShot(soundEffect[0]);
     }
 
