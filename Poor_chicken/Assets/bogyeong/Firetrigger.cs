@@ -12,7 +12,7 @@ public class Firetrigger : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
     }
 
-    private void OnParticleTrigger()
+    private void OnParticleTrigger() // 불꽃 파티클 트리거 -> 게임매니저 연결 후 목숨 감소
     {
         ps.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
 

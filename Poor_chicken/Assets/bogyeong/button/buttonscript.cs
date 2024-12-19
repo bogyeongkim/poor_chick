@@ -23,12 +23,14 @@ public class buttonscript : MonoBehaviour
     {
         UnityEngine.Debug.Log("helpbutton");
         box.SetActive(true);
+        music.Play();
     }
 
     public void OnexitButtonClick()
     {
         UnityEngine.Debug.Log("exitbutton");
         box.SetActive(false);
+        music.Play();
     }
 
     public void RestartGame()

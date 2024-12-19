@@ -29,7 +29,7 @@ public class Title_music : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "farm")
+        if (scene.name == "IntroVideo")
         {
             Destroy(gameObject); 
         }

@@ -53,15 +53,17 @@ public class movingplatform2 : MonoBehaviour
    
         if (fractionOfJourney >= 1)
         {
+            // 방향 변경하여 왔다갔다 이동하도록
             transform.position = endPosition;  
                                                
             Vector3 temp = startPosition;
             startPosition = endPosition;
             endPosition = temp;
-            startTime = Time.time; // 시간 초기화
+            startTime = Time.time;
         }
         else
         {
+            // 선형보간 이용 -> 부드러운 플랫폼 움직임
             transform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
         }
     }
@@ -72,7 +74,7 @@ public class movingplatform2 : MonoBehaviour
         UnityEngine.Debug.Log("trigger!!");
 
 
-        other.transform.parent = transform; // 객체의 부모를 발판으로 설정
+        other.transform.parent = transform; // 플랫폼을 부모로 -> 플랫폼 위에서 따라 움직이도록
     }
 
     void OnTriggerExit(Collider other)

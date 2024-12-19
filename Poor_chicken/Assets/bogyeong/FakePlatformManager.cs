@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class FakePlatformManager : MonoBehaviour
 {
-    public GameObject[] platforms; // 발판 배열
-    private int realPlatformIndex; // 진짜 발판의 인덱스
+    public GameObject[] platforms; // 플랫폼 배열
+    private int realPlatformIndex; // 진짜 플랫폼 인덱스
 
     void Start()
     {
-        // 발판 중 하나를 진짜 발판으로 랜덤 선택
+        // 플랫폼 중 하나 진짜 플랫폼으로 랜덤 선택
         realPlatformIndex = Random.Range(0, platforms.Length);
 
-        // 발판 설정
+        // 플랫폼 설정
         for (int i = 0; i < platforms.Length; i++)
         {
             if (i == realPlatformIndex)
             {
-                platforms[i].GetComponent<FakePlatform>().SetAsReal(); // 진짜 발판 설정
+                platforms[i].GetComponent<FakePlatform>().SetAsReal(); // 진짜 플랫폼 설정
             }
             else
             {
-                platforms[i].GetComponent<FakePlatform>().SetAsFake(); // 가짜 발판 설정
+                platforms[i].GetComponent<FakePlatform>().SetAsFake(); // 가짜 플랫폼 설정
             }
         }
     }
