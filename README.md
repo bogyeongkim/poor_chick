@@ -1,6 +1,6 @@
 # poor_chick / 삐삐의 가출
 3D Platformer Game with Unity
-![데모영상](https://github.com/user-attachments/assets/dbbed231-c074-4358-a8f7-cd6bdc9986f7)
+
 
 ---
 
